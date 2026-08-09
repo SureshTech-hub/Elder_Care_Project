@@ -19,6 +19,8 @@ const predictionRoutes = require("./routes/prediction.routes");
 const aiRoutes = require("./routes/ai.routes");
 const dashboardRoutes = require("./routes/dashboard.routes");
 const reportRoutes = require("./routes/report.routes");
+const riskRoutes = require("./routes/risk.routes");
+const anomalyRoutes = require("./routes/anomaly.routes");
 
 const app = express();
 
@@ -45,6 +47,8 @@ app.use("/api/v1/predictions", predictionRoutes);
 app.use("/api/v1/ai", aiRoutes);
 app.use("/api/v1/dashboard", dashboardRoutes);
 app.use("/api/v1/reports", reportRoutes);
+app.use("/api/v1/risks", riskRoutes);
+app.use("/api/v1/anomalies", anomalyRoutes);
 
 
 // Health Check
