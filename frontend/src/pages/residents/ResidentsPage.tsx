@@ -57,6 +57,8 @@ export const ResidentsPage: React.FC = () => {
           toast.success('Resident record updated');
           fetchResidents();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
         }
       } else {
         const res = await residentsApi.create(data);
@@ -64,6 +66,9 @@ export const ResidentsPage: React.FC = () => {
           toast.success('New resident added successfully');
           fetchResidents();
           setIsModalOpen(false);
+          // Reset search/filter so new resident is visible
+          setSearch('');
+          setStatusFilter('ALL');
         }
       }
     } catch (err: any) {

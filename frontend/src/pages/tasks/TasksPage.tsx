@@ -177,7 +177,10 @@ export const TasksPage: React.FC = () => {
     },
     {
       header: 'Due Date',
-      cell: (t) => <span className="text-xs">{new Date(t.dueDate).toLocaleDateString()}</span>,
+      cell: (t) => {
+        const d = new Date(t.dueDate);
+        return <span className="text-xs">{isNaN(d.getTime()) ? 'N/A' : d.toLocaleDateString()}</span>;
+      },
     },
     {
       header: 'Priority',

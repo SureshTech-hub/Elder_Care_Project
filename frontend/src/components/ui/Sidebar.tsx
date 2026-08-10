@@ -68,35 +68,37 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
         />
       )}
 
-      {/* Sidebar container */}
+      {/* Sidebar container — light and dark aware */}
       <aside
-        className={`fixed top-0 left-0 z-50 h-full w-64 bg-slate-900 text-slate-300 flex flex-col border-r border-slate-800 transition-transform duration-300 ease-in-out lg:translate-x-0 ${
-          isOpen ? 'translate-x-0' : '-translate-x-full'
-        }`}
+        className={`fixed top-0 left-0 z-50 h-full w-64 flex flex-col border-r transition-transform duration-300 ease-in-out lg:translate-x-0
+          bg-white border-slate-200
+          dark:bg-slate-900 dark:border-slate-800
+          ${isOpen ? 'translate-x-0' : '-translate-x-full'}`}
       >
         {/* Brand logo */}
-        <div className="flex h-16 items-center justify-between px-6 border-b border-slate-800">
+        <div className="flex h-16 items-center justify-between px-6 border-b border-slate-200 dark:border-slate-800">
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-indigo-600 text-white shadow-md">
               <HeartPulse className="w-5 h-5" />
             </div>
             <div>
-              <h2 className="text-sm font-bold text-white tracking-wide">ELDER CARE</h2>
-              <p className="text-[10px] text-indigo-400 font-semibold uppercase tracking-wider">
+              <h2 className="text-sm font-bold text-slate-900 dark:text-white tracking-wide">ELDER CARE</h2>
+              <p className="text-[10px] text-indigo-600 dark:text-indigo-400 font-semibold uppercase tracking-wider">
                 Command Center
               </p>
             </div>
           </div>
           <button
+            type="button"
             onClick={onClose}
-            className="lg:hidden text-slate-400 hover:text-white p-1 rounded-md"
+            className="lg:hidden text-slate-400 hover:text-slate-700 dark:hover:text-white p-1 rounded-md"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Navigation list */}
-        <div className="flex-1 overflow-y-auto py-4 px-3 space-y-1">
+        <div className="flex-1 overflow-y-auto py-4 px-3 space-y-0.5">
           {filteredItems.map((item) => (
             <NavLink
               key={item.path}
@@ -106,7 +108,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all duration-150 ${
                   isActive
                     ? 'bg-indigo-600 text-white shadow-sm'
-                    : 'text-slate-400 hover:bg-slate-800/80 hover:text-slate-200'
+                    : 'text-slate-500 dark:text-slate-400 hover:bg-slate-100 dark:hover:bg-slate-800/80 hover:text-slate-900 dark:hover:text-slate-200'
                 }`
               }
             >
@@ -115,7 +117,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
                 <span>{item.label}</span>
               </div>
               {item.badge && (
-                <span className="px-1.5 py-0.5 text-[9px] font-extrabold rounded-md bg-indigo-500/20 text-indigo-300 border border-indigo-500/30">
+                <span className="px-1.5 py-0.5 text-[9px] font-extrabold rounded-md bg-indigo-500/20 text-indigo-600 dark:text-indigo-300 border border-indigo-500/30">
                   {item.badge}
                 </span>
               )}
@@ -123,10 +125,10 @@ export const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
           ))}
         </div>
 
-        {/* Sidebar Footer info */}
-        <div className="p-4 border-t border-slate-800 bg-slate-950/40 text-[11px] text-slate-500 text-center">
-          <p className="font-semibold text-slate-400">Elder Care Predictive OS</p>
-          <p className="mt-0.5">Operational Intelligence v1.0</p>
+        {/* Sidebar Footer */}
+        <div className="p-4 border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950/40 text-[11px] text-slate-400 text-center">
+          <p className="font-semibold text-slate-500 dark:text-slate-400">Elder Care Predictive OS</p>
+          <p className="mt-0.5 text-slate-400 dark:text-slate-500">Operational Intelligence v1.0</p>
         </div>
       </aside>
     </>

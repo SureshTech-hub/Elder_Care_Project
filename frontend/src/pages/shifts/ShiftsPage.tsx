@@ -118,7 +118,7 @@ export const ShiftsPage: React.FC = () => {
   };
 
   const filtered = shifts.filter((s) => {
-    const typeMatch = s.shiftType.toLowerCase().includes(search.toLowerCase());
+    const typeMatch = (s.shiftType || '').toLowerCase().includes(search.toLowerCase());
     const statusMatch = statusFilter === 'ALL' || s.status === statusFilter;
     const shiftTypeMatch = shiftTypeFilter === 'ALL' || s.shiftType === shiftTypeFilter;
     return typeMatch && statusMatch && shiftTypeMatch;
@@ -157,7 +157,11 @@ export const ShiftsPage: React.FC = () => {
     {
       header: 'Shift & Caregiver',
       cell: (s) => {
-        const staffName = typeof s.caregiver === 'object' ? `${s.caregiver.fullName}` : 'Caregiver';
+        const caregiver = s.caregiver;
+        const staffName =
+          caregiver && typeof caregiver === 'object' && 'fullName' in caregiver
+            ? caregiver.fullName
+            : 'Unassigned';
         return (
           <div className="flex items-center gap-2.5">
             <div className="flex h-8 w-8 items-center justify-center rounded-full bg-indigo-100 dark:bg-indigo-950/50 text-indigo-600 dark:text-indigo-400">
@@ -165,7 +169,7 @@ export const ShiftsPage: React.FC = () => {
             </div>
             <div>
               <p className="font-bold text-slate-900 dark:text-slate-100">{staffName}</p>
-              <p className="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">{s.shiftType} SHIFT</p>
+              <p className="text-xs text-indigo-600 dark:text-indigo-400 font-semibold">{s.shiftType || 'N/A'} SHIFT</p>
             </div>
           </div>
         );
@@ -173,7 +177,11 @@ export const ShiftsPage: React.FC = () => {
     },
     {
       header: 'Shift Date',
-      cell: (s) => <span className="text-xs">{new Date(s.shiftDate).toLocaleDateString()}</span>,
+      cell: (s) => {
+        if (!s.shiftDate) return <span className="text-xs">N/A</span>;
+        const d = new Date(s.shiftDate);
+        return <span className="text-xs">{isNaN(d.getTime()) ? 'N/A' : d.toLocaleDateString()}</span>;
+      },
     },
     {
       header: 'Hours',

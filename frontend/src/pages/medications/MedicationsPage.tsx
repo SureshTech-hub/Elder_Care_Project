@@ -166,7 +166,10 @@ export const MedicationsPage: React.FC = () => {
     },
     {
       header: 'Start Date',
-      cell: (m) => <span className="text-xs">{new Date(m.startDate).toLocaleDateString()}</span>,
+      cell: (m) => {
+        const d = new Date(m.startDate);
+        return <span className="text-xs">{isNaN(d.getTime()) ? 'N/A' : d.toLocaleDateString()}</span>;
+      },
     },
     {
       header: 'Status',

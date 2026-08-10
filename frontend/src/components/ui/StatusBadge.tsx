@@ -6,10 +6,11 @@ interface StatusBadgeProps {
 }
 
 export const StatusBadge: React.FC<StatusBadgeProps> = ({ status, size = 'md' }) => {
-  const formatted = status.replace(/_/g, ' ');
+  const safeStatus = status || 'PENDING';
+  const formatted = safeStatus.replace(/_/g, ' ');
 
   const getVariant = (s: string) => {
-    switch (s.toUpperCase()) {
+    switch ((s || '').toUpperCase()) {
       case 'ACTIVE':
       case 'COMPLETED':
       case 'RESOLVED':

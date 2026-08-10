@@ -181,7 +181,10 @@ export const IncidentsPage: React.FC = () => {
     },
     {
       header: 'Incident Date',
-      cell: (i) => <span className="text-xs">{new Date(i.incidentDate).toLocaleDateString()}</span>,
+      cell: (i) => {
+        const d = new Date(i.incidentDate);
+        return <span className="text-xs">{isNaN(d.getTime()) ? 'N/A' : d.toLocaleDateString()}</span>;
+      },
     },
     {
       header: 'Severity',

@@ -182,7 +182,10 @@ export const CarePlansPage: React.FC = () => {
     },
     {
       header: 'Start Date',
-      cell: (cp) => <span className="text-xs">{new Date(cp.startDate).toLocaleDateString()}</span>,
+      cell: (cp) => {
+        const d = new Date(cp.startDate);
+        return <span className="text-xs">{isNaN(d.getTime()) ? 'N/A' : d.toLocaleDateString()}</span>;
+      },
     },
     {
       header: 'Priority',

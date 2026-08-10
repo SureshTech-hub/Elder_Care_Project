@@ -181,7 +181,10 @@ export const ActivitiesPage: React.FC = () => {
     },
     {
       header: 'Scheduled Date',
-      cell: (a) => <span className="text-xs">{new Date(a.scheduledDate).toLocaleDateString()}</span>,
+      cell: (a) => {
+        const d = new Date(a.scheduledDate);
+        return <span className="text-xs">{isNaN(d.getTime()) ? 'N/A' : d.toLocaleDateString()}</span>;
+      },
     },
     {
       header: 'Status',
