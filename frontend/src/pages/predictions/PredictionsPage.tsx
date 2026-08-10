@@ -174,7 +174,20 @@ export const PredictionsPage: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Select label="Prediction Type" options={[{ value: 'FALL_RISK', label: 'Fall Risk' }, { value: 'HEALTH_RISK', label: 'Health Risk' }, { value: 'MEDICATION_RISK', label: 'Medication Risk' }, { value: 'HOSPITALIZATION', label: 'Hospitalization' }, { value: 'OTHER', label: 'Other' }]} {...register('predictionType')} />
             <Select label="Risk Level" options={[{ value: 'LOW', label: 'Low' }, { value: 'MEDIUM', label: 'Medium' }, { value: 'HIGH', label: 'High' }, { value: 'CRITICAL', label: 'Critical' }]} {...register('riskLevel')} />
-            <Input label="Probability (0 - 1.0)" type="number" step="0.01" defaultValue="0.75" {...register('probability', { required: 'Required' })} />
+            <Input
+              label="Probability (0 - 1.0)"
+              type="number"
+              step="0.01"
+              min="0"
+              max="1"
+              defaultValue="0.75"
+              {...register('probability', {
+                required: 'Required',
+                min: { value: 0, message: 'Must be at least 0' },
+                max: { value: 1, message: 'Must be at most 1' }
+              })}
+              error={errors.probability?.message as string}
+            />
             <Input label="Risk Score (0 - 100)" type="number" defaultValue="75" {...register('score')} />
           </div>
 

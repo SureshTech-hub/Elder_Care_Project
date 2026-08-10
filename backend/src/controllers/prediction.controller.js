@@ -67,6 +67,13 @@ exports.createPrediction = async (req, res) => {
   } catch (error) {
     console.error("Create Prediction Error:", error);
 
+    if (error.name === "ValidationError") {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+
     res.status(500).json({
       success: false,
       message: "Server error while creating prediction.",
