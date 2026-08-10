@@ -1,0 +1,31 @@
+const ROLES = {
+  ADMIN: "ADMIN",
+  MANAGER: "MANAGER",
+  ANALYST: "ANALYST",
+  FIELD_STAFF: "FIELD_STAFF",
+};
+
+const STATUS = {
+  ACTIVE: "ACTIVE",
+  INACTIVE: "INACTIVE",
+};
+
+const RISK_LEVELS = {
+  LOW: "LOW",
+  MEDIUM: "MEDIUM",
+  HIGH: "HIGH",
+  CRITICAL: "CRITICAL",
+};
+
+const PAGINATION = {
+  DEFAULT_PAGE: 1,
+  DEFAULT_LIMIT: 10,
+  MAX_LIMIT: 100,
+};
+
+module.exports = {
+  ROLES,
+  STATUS,
+  RISK_LEVELS,
+  PAGINATION,
+};

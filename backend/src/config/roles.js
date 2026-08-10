@@ -1,0 +1,8 @@
+const ROLES = {
+  ADMIN: "ADMIN",
+  MANAGER: "MANAGER",
+  ANALYST: "ANALYST",
+  FIELD_STAFF: "FIELD_STAFF",
+};
+
+module.exports = ROLES;
