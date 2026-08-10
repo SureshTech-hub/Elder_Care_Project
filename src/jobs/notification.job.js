@@ -1,21 +1,36 @@
+const cron = require("node-cron");
 const Notification = require("../models/Notification");
 
-const checkNotifications = async () => {
+const processUnreadNotifications = async () => {
   try {
-    const notifications = await Notification.find({
-      status: { $ne: "READ" },
-    }).sort({ createdAt: -1 });
+    const count = await Notification.countDocuments({
+      isRead: false,
+    });
 
     console.log(
-      `[Notification Job] Unread notifications: ${notifications.length}`
+      `[Notification Job] Unread notifications: ${count}`
     );
 
-    return notifications;
+    return count;
   } catch (error) {
-    console.error("[Notification Job Error]:", error.message);
+    console.error(
+      "[Notification Job] Error:",
+      error.message
+    );
+
+    return 0;
   }
 };
 
+const startNotificationJob = () => {
+  cron.schedule("*/5 * * * *", async () => {
+    await processUnreadNotifications();
+  });
+
+  console.log("[Notification Job] Started.");
+};
+
 module.exports = {
-  checkNotifications,
+  processUnreadNotifications,
+  startNotificationJob,
 };

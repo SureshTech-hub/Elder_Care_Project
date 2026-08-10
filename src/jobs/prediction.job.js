@@ -1,21 +1,36 @@
+const cron = require("node-cron");
 const Prediction = require("../models/Prediction");
 
-const checkPredictions = async () => {
+const processActivePredictions = async () => {
   try {
-    const activePredictions = await Prediction.find({
+    const count = await Prediction.countDocuments({
       status: "ACTIVE",
-    }).sort({ createdAt: -1 });
+    });
 
     console.log(
-      `[Prediction Job] Active predictions: ${activePredictions.length}`
+      `[Prediction Job] Active predictions: ${count}`
     );
 
-    return activePredictions;
+    return count;
   } catch (error) {
-    console.error("[Prediction Job Error]:", error.message);
+    console.error(
+      "[Prediction Job] Error:",
+      error.message
+    );
+
+    return 0;
   }
 };
 
+const startPredictionJob = () => {
+  cron.schedule("*/10 * * * *", async () => {
+    await processActivePredictions();
+  });
+
+  console.log("[Prediction Job] Started.");
+};
+
 module.exports = {
-  checkPredictions,
+  processActivePredictions,
+  startPredictionJob,
 };

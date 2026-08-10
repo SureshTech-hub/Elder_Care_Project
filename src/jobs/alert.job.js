@@ -1,21 +1,36 @@
+const cron = require("node-cron");
 const Alert = require("../models/Alert");
 
-const checkAlerts = async () => {
+const processActiveAlerts = async () => {
   try {
-    const activeAlerts = await Alert.find({
+    const count = await Alert.countDocuments({
       status: "ACTIVE",
-    }).sort({ createdAt: -1 });
+    });
 
     console.log(
-      `[Alert Job] Active alerts: ${activeAlerts.length}`
+      `[Alert Job] Active alerts: ${count}`
     );
 
-    return activeAlerts;
+    return count;
   } catch (error) {
-    console.error("[Alert Job Error]:", error.message);
+    console.error(
+      "[Alert Job] Error:",
+      error.message
+    );
+
+    return 0;
   }
 };
 
+const startAlertJob = () => {
+  cron.schedule("*/5 * * * *", async () => {
+    await processActiveAlerts();
+  });
+
+  console.log("[Alert Job] Started.");
+};
+
 module.exports = {
-  checkAlerts,
+  processActiveAlerts,
+  startAlertJob,
 };
