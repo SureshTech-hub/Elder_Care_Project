@@ -44,6 +44,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({ filters, onReset }) => {
 
       {hasActiveFilter && onReset && (
         <button
+          type="button"
           onClick={onReset}
           className="text-xs font-medium text-indigo-600 hover:text-indigo-700 dark:text-indigo-400 underline cursor-pointer"
         >
