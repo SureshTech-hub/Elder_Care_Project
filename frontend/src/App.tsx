@@ -7,6 +7,7 @@ import { ProtectedRoute } from './components/ProtectedRoute';
 import { DashboardLayout } from './layouts/DashboardLayout';
 
 import { LoginPage } from './pages/LoginPage';
+import { RegisterPage } from './pages/RegisterPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { ResidentsPage } from './pages/residents/ResidentsPage';
 import { ResidentDetailPage } from './pages/residents/ResidentDetailPage';
@@ -33,6 +34,7 @@ export const App: React.FC = () => {
           <Routes>
             {/* Public Routes */}
             <Route path="/login" element={<LoginPage />} />
+            <Route path="/register" element={<RegisterPage />} />
 
             {/* Protected Dashboard Layout Routes */}
             <Route element={<ProtectedRoute />}>
