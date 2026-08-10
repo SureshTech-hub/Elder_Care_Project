@@ -84,6 +84,9 @@ export const ActivitiesPage: React.FC = () => {
           toast.success('Activity updated');
           fetchData();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
+          setTypeFilter('ALL');
         }
       } else {
         const res = await activitiesApi.create(payload);
@@ -91,6 +94,9 @@ export const ActivitiesPage: React.FC = () => {
           toast.success('Activity scheduled');
           fetchData();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
+          setTypeFilter('ALL');
         }
       }
     } catch (err: any) {

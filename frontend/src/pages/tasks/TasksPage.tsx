@@ -84,6 +84,9 @@ export const TasksPage: React.FC = () => {
           toast.success('Task updated');
           fetchData();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
+          setPriorityFilter('ALL');
         }
       } else {
         const res = await tasksApi.create(formData);
@@ -91,6 +94,9 @@ export const TasksPage: React.FC = () => {
           toast.success('Task created');
           fetchData();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
+          setPriorityFilter('ALL');
         }
       }
     } catch (err: any) {

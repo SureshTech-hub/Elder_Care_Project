@@ -88,6 +88,9 @@ export const IncidentsPage: React.FC = () => {
           toast.success('Incident updated');
           fetchData();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
+          setSeverityFilter('ALL');
         }
       } else {
         const res = await incidentsApi.create(formData);
@@ -95,6 +98,9 @@ export const IncidentsPage: React.FC = () => {
           toast.success('Incident logged');
           fetchData();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
+          setSeverityFilter('ALL');
         }
       }
     } catch (err: any) {

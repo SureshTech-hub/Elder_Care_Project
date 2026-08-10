@@ -98,6 +98,9 @@ export const CarePlansPage: React.FC = () => {
           toast.success('Care plan updated');
           fetchData();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
+          setPriorityFilter('ALL');
         }
       } else {
         const res = await carePlansApi.create(payload);
@@ -105,6 +108,9 @@ export const CarePlansPage: React.FC = () => {
           toast.success('Care plan created');
           fetchData();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
+          setPriorityFilter('ALL');
         }
       }
     } catch (err: any) {

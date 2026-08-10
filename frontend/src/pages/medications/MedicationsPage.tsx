@@ -83,6 +83,8 @@ export const MedicationsPage: React.FC = () => {
           toast.success('Medication updated');
           fetchData();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
         }
       } else {
         const res = await medicationsApi.create(formData);
@@ -90,6 +92,8 @@ export const MedicationsPage: React.FC = () => {
           toast.success('Medication prescribed');
           fetchData();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
         }
       }
     } catch (err: any) {

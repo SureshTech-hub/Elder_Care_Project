@@ -84,6 +84,9 @@ export const ShiftsPage: React.FC = () => {
           toast.success('Shift updated');
           fetchShifts();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
+          setShiftTypeFilter('ALL');
         }
       } else {
         const res = await shiftsApi.create(payload);
@@ -91,6 +94,9 @@ export const ShiftsPage: React.FC = () => {
           toast.success('Shift scheduled');
           fetchShifts();
           setIsModalOpen(false);
+          setSearch('');
+          setStatusFilter('ALL');
+          setShiftTypeFilter('ALL');
         }
       }
     } catch (err: any) {
