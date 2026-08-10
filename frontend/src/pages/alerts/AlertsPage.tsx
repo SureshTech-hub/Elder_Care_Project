@@ -67,6 +67,9 @@ export const AlertsPage: React.FC = () => {
         fetchData();
         setIsModalOpen(false);
         reset();
+        setSearch('');
+        setStatusFilter('ALL');
+        setSeverityFilter('ALL');
       }
     } catch (err: any) {
       toast.error(err.response?.data?.message || 'Creation failed');

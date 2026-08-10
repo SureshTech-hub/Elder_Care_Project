@@ -60,6 +60,8 @@ export const PredictionsPage: React.FC = () => {
         fetchData();
         setIsModalOpen(false);
         reset();
+        setSearch('');
+        setRiskFilter('ALL');
       }
     } catch (err: any) {
       toast.error(err.response?.data?.message || 'Creation failed');
